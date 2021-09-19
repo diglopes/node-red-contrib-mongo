@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/diglopes/node-red-contrib-mongo/issues"
   },
-  "homepage": "https://github.com/diglopes/node-red-contrib-mongo#readme"
+  "homepage": "https://github.com/diglopes/node-red-contrib-mongo#readme",
+  "dependencies": {
+    "mongodb": "^4.1.2"
+  }
 }
