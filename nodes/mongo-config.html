@@ -1,0 +1,74 @@
+<script type="text/javascript">
+    RED.nodes.registerType('mongo-config', {
+        category: 'config',
+        color: "rgb(218, 196, 180)",
+        defaults: {
+            hostname: { value: "127.0.0.1", required: true },
+            topology: { value: "DIRECT", required: true },
+            connectOptions: { value: "", required: false },
+            port: { value: 27017, required: true },
+            db: { value: "", required: true },
+            name: { value: "" }
+        },
+        credentials: {
+            user: { type: "text" },
+            password: { type: "password" }
+        },
+        label: function () {
+            return this.name || this.db + "@" + this.hostname;
+        },
+        oneditprepare: function () {
+            $("#node-config-input-topology").on("change", function () {
+                var topology = $("#node-config-input-topology option:selected").val();
+                if (topology === "DIRECT") {
+                    $(".node-config-input-port").show();
+                } else {
+                    $(".node-config-input-port").hide();
+                }
+            });
+        },
+    });
+</script>
+
+<script type="text/html" data-template-name="mongo-config">
+    <div class="form-row">
+        <label for="node-config-input-hostname"><i class="fa fa-bookmark"></i> Host</label>
+        <input class="input-append-left" type="text" id="node-config-input-hostname" placeholder="localhost">
+    </div>
+
+    <div class="form-row node-config-input-topology">
+      <label for="node-config-input-topology">Topology</label>
+          <select id="node-config-input-topology">
+            <option type="button" class="red-ui-button toggle topology-group" selected  value="DIRECT">Direct (mongodb://)</button>
+            <option type="button" class="red-ui-button toggle topology-group" value="REPLICA_SET">ReplicaSet/Cluster (mongodb://)</button>
+            <option type="button" class="red-ui-button toggle topology-group" value="DNS_CLUSTER">DNS Cluster (mongodb+srv://)</button>
+          </select>
+    </div>
+
+    <div class="form-row node-config-connectOptions">
+        <label for="node-config-input-connectOptions"><i class="fa fa-wrench"></i> Options</label>
+        <input type="text" id="node-config-input-connectOptions">
+    </div>
+
+    <div class="form-row node-config-input-port">
+        <label for="node-config-input-port"><i class="fa fa-plug"></i> Port</label>
+        <input type="text" id="node-config-input-port" style="width:55px;">
+    </div>
+
+    <div class="form-row">
+        <label for="node-config-input-db"><i class="fa fa-database"></i> Database</label>
+        <input type="text" id="node-config-input-db">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-user"><i class="fa fa-user"></i> Username</span></label>
+        <input type="text" id="node-config-input-user">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-password"><i class="fa fa-lock"></i> Password</span></label>
+        <input type="password" id="node-config-input-password">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-config-input-name" data-i18n="[placeholder]node-red:common.label.name">
+    </div>
+</script>

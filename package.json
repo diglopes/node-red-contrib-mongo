@@ -4,7 +4,9 @@
   "description": "Node-RED nodes for communication with MongoDB",
   "node-red": {
     "nodes": {
-      "mongoIn": "./nodes/mongo-in.js"
+      "mongoIn": "./nodes/mongo-in.js",
+      "mongoConfig": "./nodes/mongo-config.js"
+
     }
   },
   "keywords": [
